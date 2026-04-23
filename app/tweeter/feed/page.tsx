@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { cn } from "@/app/_utils/lib/helper";
 import { createClient } from "@utils/supabase/client";
 import { Tweet } from "@/app/_components/Tweet";
 
@@ -13,7 +12,8 @@ export default function PublicFeed() {
     const { data } = await supabase
       .from("slam-lord-tweets")
       .select("*")
-      .order("published_date", { ascending: false }); // Le plus récent en premier (index 0)
+      .order("published_date", { ascending: false })
+      .eq("is_published", true);
     if (data) setTweets(data);
   };
 
