@@ -8,7 +8,7 @@ export default function RegiePage() {
 
   const [tweets, setTweets] = useState<any[]>([]);
   const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("FLAMMES_OFFICIEL");
+  const [author, setAuthor] = useState("SLAM_DOR_OFFICIEL");
 
   const fetchTweets = async () => {
     const { data } = await supabase
@@ -36,7 +36,6 @@ export default function RegiePage() {
     };
   }, []);
 
-  // 2. Ajouter un nouveau tweet en brouillon
   const addDraft = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!content) return;
@@ -51,7 +50,6 @@ export default function RegiePage() {
     fetchTweets();
   };
 
-  // 3. Publier un tweet
   const publish = async (id: string) => {
     await supabase
       .from("slam-lord-tweets")
@@ -67,7 +65,6 @@ export default function RegiePage() {
       </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {/* COLONNE GAUCHE : FORMULAIRE */}
         <section className="border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <h2 className="text-2xl mb-6 uppercase italic">Nouveau Message</h2>
           <form onSubmit={addDraft} className="space-y-4">
@@ -85,7 +82,7 @@ export default function RegiePage() {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 className="w-full border-2 border-black p-2 h-32 focus:bg-blue-100 outline-none"
-                placeholder="Alors c'est qui le patron ?"
+                placeholder="C'était un tout petit péno dans le tout petit chien... "
               />
             </div>
             <button className="w-full bg-black text-white p-4 uppercase hover:bg-zinc-800 active:translate-y-1">
@@ -96,7 +93,7 @@ export default function RegiePage() {
 
         <section className="space-y-6">
           <h2 className="text-2xl uppercase italic border-l-8 border-orange-500 pl-4">
-            Flux de Modération
+            Feed en direct
           </h2>
 
           {tweets.map((t) => (
@@ -117,7 +114,7 @@ export default function RegiePage() {
               )}
 
               {t.is_published && (
-                <div className="absolute bottom-2 right-2 bg-black text-white px-2 py-1 text-[10px] uppercase">
+                <div className="absolute bottom-2 right-2 bg-black text-green px-2 py-1 text-[10px] uppercase">
                   En ligne
                 </div>
               )}
