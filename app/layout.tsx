@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Slam Dor 2026",
+  title: "Slam D'or 2026",
   description: "Le feed des slams d'or 2026",
 };
 

@@ -21,7 +21,7 @@ export function TweetLoader() {
   }, []);
 
   return (
-    <div className="mb-8 p-6 border-[3px] border-white rounded-xl bg-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+    <div className="text-black mb-8 p-6 border-[3px] border-white rounded-xl bg-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
       <div className="flex items-center gap-3 mb-4">
         <Skeleton className="h-10 w-10 rounded-full" />
         <div className="space-y-2">

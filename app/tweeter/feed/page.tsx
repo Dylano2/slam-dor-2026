@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { createClient } from "@utils/supabase/client";
 import { TweetLoader } from "@/app/_components/TweetLoader";
 import { Tweet } from "@/app/_components/Tweet";
+import Image from "next/image";
 
 export default function Feed() {
   const [tweets, setTweets] = useState<any[]>([]);
@@ -60,16 +61,31 @@ export default function Feed() {
   }, []);
 
   return (
-    <div className="max-w-xl mx-auto py-10 px-4 space-y-8">
-      {tweets.map((t, i) => (
-        <div key={t.id}>
-          {pendingTweets.has(t.id) ? (
-            <TweetLoader />
-          ) : (
-            <Tweet tweet={t} isFirst={i === 0} />
-          )}
-        </div>
-      ))}
+    <div className="min-h-screen bg-black text-white p-4 font-sans">
+      <header className="flex md:flex-row flex-col items-center sticky z-10 top-0 bg-black/80 backdrop-blur-md py-4 border-b border-zinc-800 mb-6">
+        <Image
+          className="border-b border-zinc-800 mb-4 md:border-0"
+          src="/icon.png"
+          alt="Slam d'or logo"
+          width={300}
+          height={300}
+          priority
+        />
+        <h1 className="text-4xl font-black tracking-tighter text-orange-500">
+          Feed d'actualité
+        </h1>
+      </header>
+      <div className="max-w-xl mx-auto py-10 px-4 space-y-8">
+        {tweets.map((t, i) => (
+          <div key={t.id}>
+            {pendingTweets.has(t.id) ? (
+              <TweetLoader />
+            ) : (
+              <Tweet tweet={t} isFirst={i === 0} />
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
