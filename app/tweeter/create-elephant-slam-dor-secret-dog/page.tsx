@@ -9,6 +9,15 @@ export default function RegiePage() {
   const [tweets, setTweets] = useState<any[]>([]);
   const [content, setContent] = useState("");
   const [author, setAuthor] = useState("SLAM_DOR_OFFICIEL");
+  const [publicationDelay, setPublicationDelay] = useState(0);
+
+  const updatePublicationDelay = (value: string) => {
+    const parsedValue = Number(value);
+
+    if (!isNaN(parsedValue) && parsedValue >= 0) {
+      setPublicationDelay(parsedValue);
+    }
+  };
 
   const fetchTweets = async () => {
     const { data } = await supabase
@@ -55,6 +64,21 @@ export default function RegiePage() {
       .from("slam-lord-tweets")
       .update({ is_published: true, published_date: new Date().toISOString() })
       .eq("id", id);
+    fetchTweets();
+  };
+
+  const publishLater = async (id: string, minutes: number) => {
+    const scheduledDate = new Date();
+    scheduledDate.setMinutes(scheduledDate.getMinutes() + minutes);
+
+    await supabase
+      .from("slam-lord-tweets")
+      .update({
+        is_published: true,
+        published_date: scheduledDate.toISOString(),
+      })
+      .eq("id", id);
+
     fetchTweets();
   };
 
@@ -105,12 +129,20 @@ export default function RegiePage() {
               </div>
 
               {!t.is_published && (
-                <button
-                  onClick={() => publish(t.id)}
-                  className="absolute bottom-2 right-2 bg-green-500 border-2 border-black px-4 py-2 font-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all text-sm uppercase"
-                >
-                  Publier
-                </button>
+                <div className="absolute bottom-2 right-2 flex flex-col   w-20 gap-4">
+                  <input
+                    value={publicationDelay}
+                    onChange={(e) => updatePublicationDelay(e.target.value)}
+                    placeholder="0"
+                    className=" border-2 border-black p-1 focus:bg-yellow-200 outline-none"
+                  />{" "}
+                  <button
+                    onClick={() => publishLater(t.id, publicationDelay)}
+                    className=" bg-green-500 border-2 border-black p-1 font-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all text-sm uppercase"
+                  >
+                    Publier
+                  </button>
+                </div>
               )}
 
               {t.is_published && (
