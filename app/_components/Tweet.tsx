@@ -18,7 +18,7 @@ export function Tweet({
 }) {
   const imagePath = tweet.image_url ? `/assets/${tweet.image_url}.png` : null;
   return (
-    <Card className="md:p-4 shadow-[8px_8px_0px_0px_var(--shadow-color)]  rounded-xl animate-in fade-in gap-4 slide-in-from-bottom-4 duration-500">
+    <Card className=" md:py-3 shadow-[8px_8px_0px_0px_var(--shadow-color)]  rounded-xl animate-in fade-in gap-1 slide-in-from-bottom-4 duration-500">
       <CardHeader>
         <CardTitle className="text-zinc-100 font-bold flex md:flex-row flex-col justify-between">
           <div className="flex gap-2 items-center">
@@ -26,7 +26,7 @@ export function Tweet({
           </div>
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col gap-4">
+      <CardContent className="flex flex-col gap-1">
         <p>{tweet.content}</p>
         {imagePath && (
           <div className="mt-4 border-2 border-black overflow-hidden shadow-[4px_4px_0px_0px_black]">

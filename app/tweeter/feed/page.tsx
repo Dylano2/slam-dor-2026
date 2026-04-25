@@ -62,7 +62,7 @@ export default function Feed() {
 
   return (
     <div className="min-h-screen bg-black text-white p-4 font-sans">
-      <header className="flex md:flex-row flex-col items-center sticky z-10 top-0 bg-black/80 backdrop-blur-md py-4 border-b border-zinc-800 mb-6">
+      <header className="flex md:flex-row flex-col items-center sticky z-10 top-0 bg-black/80 backdrop-blur-md border-b border-zinc-800 mb-6">
         <Image
           className="border-b border-zinc-800 mb-4 md:border-0"
           src="/icon.png"
@@ -75,7 +75,7 @@ export default function Feed() {
           Feed d'actualité
         </h1>
       </header>
-      <div className="max-w-xl mx-auto py-10 px-4 space-y-8">
+      <div className="max-w-xl mx-auto px-4 space-y-8">
         {tweets.map((t, i) => (
           <div key={t.id}>
             {pendingTweets.has(t.id) ? (
